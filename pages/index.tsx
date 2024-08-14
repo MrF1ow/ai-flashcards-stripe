@@ -11,21 +11,9 @@ import { GithubIcon } from "@/components/icons";
 import DefaultLayout from "@/layouts/default";
 
 export default function IndexPage() {
-  const router = useRouter();
-  const handleSignIn = () => {
-    router.push("/sign-in");
-  };
-  const handleSignUp = () => {
-    router.push("/sign-up");
-  };
   return (
     <DefaultLayout>
-      <Button variant="shadow" size="lg" onClick={handleSignIn}>
-        Sign In
-      </Button>
-      <Button variant="shadow" size="lg" onClick={handleSignUp}>
-        Sign Up
-      </Button>
+      <div>HELLO WORLD</div>
     </DefaultLayout>
   );
 }
