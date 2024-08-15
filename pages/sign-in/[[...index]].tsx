@@ -1,5 +1,20 @@
 import { SignIn } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
+import { useTheme } from "next-themes";
+
+import AuthoLayout from "@/layouts/autho";
 
 export default function SignUpPage() {
-    return <SignIn forceRedirectUrl={process.env.NEXT_PUBLIC_CLERK_REDIRECT_URL}/>;
+  const { theme } = useTheme();
+
+  const formTheme = theme === "dark" ? dark : undefined;
+  return (
+    <AuthoLayout>
+      <SignIn
+        appearance={{
+          baseTheme: formTheme,
+        }}
+      />
+    </AuthoLayout>
+  );
 }

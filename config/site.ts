@@ -15,7 +15,7 @@ export const siteConfig = {
     },
     {
       label: "Dashboard",
-      href: "/Dashboard",
+      href: "/dashboard",
     },
     {
       label: "Pricing",
@@ -37,7 +37,7 @@ export const siteConfig = {
     },
     {
       label: "Dashboard",
-      href: "/Dashboard",
+      href: "/dashboard",
     },
     {
       label: "Pricing",

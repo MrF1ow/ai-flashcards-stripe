@@ -13,8 +13,9 @@ import { Link } from "@nextui-org/link";
 import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
+import { IoIosLogOut } from "react-icons/io";
 import { useRouter } from "next/router";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth, useClerk } from "@clerk/nextjs";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
@@ -23,18 +24,17 @@ import { GithubIcon } from "@/components/icons";
 export const Navbar = () => {
   const router = useRouter();
   const { isSignedIn } = useAuth();
-
-  useEffect(() => {
-    if (isSignedIn) {
-      router.push("/dashboard");
-    }
-  }, [isSignedIn]);
+  const { signOut } = useClerk();
 
   const handleSignIn = () => {
     router.push("/sign-in");
   };
   const handleSignUp = () => {
     router.push("/sign-up");
+  };
+
+  const handleLogout = () => {
+    signOut({ redirectUrl: "/" });
   };
 
   return (
@@ -74,6 +74,12 @@ export const Navbar = () => {
             <GithubIcon className="text-default-500" />
           </Link>
           <ThemeSwitch />
+          {isSignedIn && (
+            <IoIosLogOut
+              size={22}
+              onClick={handleLogout}
+            />
+          )}
         </NavbarItem>
         {!isSignedIn && (
           <NavbarItem className="hidden sm:flex gap-2">
