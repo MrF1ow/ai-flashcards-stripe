@@ -1,9 +1,17 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-const isProtectedRoute = createRouteMatcher(["/dashboard(.*)"]);
+const isPublicRoute = createRouteMatcher([
+  "/sign-in(.*)",
+  "/sign-up(.*)",
+  "/(.*)",
+]);
 
-export default clerkMiddleware((auth, req) => {
-  if (isProtectedRoute(req)) {
+/*
+  This middleware protects all routes except public routes.
+  If the user is not authenticated, they will be redirected to the sign-in page.
+*/
+export default clerkMiddleware((auth, request) => {
+  if (!isPublicRoute(request)) {
     auth().protect();
   }
 });
