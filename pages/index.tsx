@@ -1,16 +1,68 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "@clerk/nextjs";
+import { motion } from "framer-motion";
 
 import DefaultLayout from "@/layouts/default";
+import { subtitle, title } from "@/components/primitives";
+import { container, moveIn } from "@/components/movements";
+import { Button } from "@nextui-org/button";
+import FeaturesSection from "@/sections/features";
+import PricingSection from "@/sections/pricing";
 
 export default function IndexPage() {
   const router = useRouter();
-  const { isSignedIn } = useAuth();
 
   return (
-    <DefaultLayout>
-      <div>HELLO WORLD</div>
-    </DefaultLayout>
+    <>
+      <DefaultLayout>
+        <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10 h-allIsh">
+          <div className="text-center">
+            <motion.div
+              initial="initial"
+              animate="animate"
+              variants={container}
+            >
+              <motion.h1
+                className={title({
+                  size: "lg",
+                  color: "violet",
+                  fullWidth: true,
+                })}
+                variants={moveIn}
+              >
+                Welcome to Flashcard AI
+              </motion.h1>
+              <br />
+              <motion.h1
+                className={title({ size: "sm", fullWidth: true })}
+                variants={moveIn}
+              >
+                The easiest way to create flashcards from your text.
+              </motion.h1>
+              <motion.div
+                className="pt-8 flex items-center justify-center gap-4"
+                variants={moveIn}
+              >
+                <Button
+                  size="lg"
+                  radius="md"
+                  color="secondary"
+                  variant="shadow"
+                  onClick={() => router.push("/generate")}
+                >
+                  Get Started
+                </Button>
+                <Button size="lg" radius="md" color="default" variant="ghost">
+                  Learn More
+                </Button>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+      </DefaultLayout>
+      <FeaturesSection />
+      <PricingSection />
+    </>
   );
 }
