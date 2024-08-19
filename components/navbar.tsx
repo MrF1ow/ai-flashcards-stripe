@@ -74,29 +74,24 @@ export const Navbar = () => {
             <GithubIcon className="text-default-500" />
           </Link>
           <ThemeSwitch />
-          {isSignedIn && (
-            <IoIosLogOut
-              size={22}
-              onClick={handleLogout}
-            />
-          )}
+          {isSignedIn && <IoIosLogOut size={22} onClick={handleLogout} />}
         </NavbarItem>
         {!isSignedIn && (
           <NavbarItem className="hidden sm:flex gap-2">
             <Button
-              radius="md"
-              className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+              radius="sm"
+              className="bg-gradient-to-tr from-[#FF1CF7] to-[#b249f8] text-white shadow-lg"
               variant="solid"
-              size="sm"
+              size="md"
               onClick={handleSignIn}
             >
               Sign In
             </Button>
             <Button
-              radius="md"
-              className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+              radius="sm"
+              className="bg-gradient-to-tr from-[#FF1CF7] to-[#b249f8] text-white shadow-lg"
               variant="solid"
-              size="sm"
+              size="md"
               onClick={handleSignUp}
             >
               Sign Up

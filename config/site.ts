@@ -10,20 +10,12 @@ export const siteConfig = {
       href: "/",
     },
     {
-      label: "Learn",
-      href: "/learn",
+      label: "Generate",
+      href: "/generate",
     },
     {
-      label: "Dashboard",
-      href: "/dashboard",
-    },
-    {
-      label: "Pricing",
-      href: "/pricing",
-    },
-    {
-      label: "About",
-      href: "/about",
+      label: "Flashcards",
+      href: "/flashcards",
     },
   ],
   navMenuItems: [
@@ -32,20 +24,12 @@ export const siteConfig = {
       href: "/",
     },
     {
-      label: "Learn",
-      href: "/learn",
+      label: "Generate",
+      href: "/generate",
     },
     {
-      label: "Dashboard",
-      href: "/dashboard",
-    },
-    {
-      label: "Pricing",
-      href: "/pricing",
-    },
-    {
-      label: "About",
-      href: "/about",
+      label: "Flashcards",
+      href: "/flashcards",
     },
     {
       label: "Logout",

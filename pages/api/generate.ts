@@ -14,3 +14,5 @@ You should return in the following JSON format:
   ]
 }
 `
+
+export async function POST(req) {}
