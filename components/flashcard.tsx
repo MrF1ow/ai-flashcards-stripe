@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FlashcardProps } from "@/types";
-import { Card } from "@nextui-org/card";
+import { Card, CardBody } from "@nextui-org/card";
+import { motion } from "framer-motion";
 
 const Flashcard = ({ front, back }: FlashcardProps) => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -10,24 +11,21 @@ const Flashcard = ({ front, back }: FlashcardProps) => {
   };
 
   return (
-    <Card
-      onClick={handleFlip}
-      className="transition-transform transform hover:scale-105"
-      shadow="md"
-    >
-      <div
-        className={`flex items-center justify-center w-full h-full transition-transform transform-gpu ${
-          isFlipped ? "rotate-y-180" : ""
-        }`}
+    <div className="relative w-80 h-64 perspective" onClick={handleFlip}>
+      <motion.div
+        className="absolute w-full h-full transition-transform transform-style-preserve-3d"
+        animate={{ rotateY: isFlipped ? 180 : 0 }}
+        transition={{ duration: 0.3 }}
       >
-        <div className="w-full h-full bg-white shadow-lg rounded-lg p-4 flex items-center justify-center">
-          <p className="text-2xl font-bold text-center">{front}</p>
+        <div className="absolute w-full h-full backface-hidden">
+          <Card shadow="md" className="h-full flex items-center justify-center">
+            <CardBody className="flex justify-center items-center h-full w-full">
+              { isFlipped ? back : front }
+            </CardBody>
+          </Card>
         </div>
-        <div className="w-full h-full bg-white shadow-lg rounded-lg p-4 flex items-center justify-center rotate-y-180">
-          <p className="text-2xl font-bold text-center">{back}</p>
-        </div>
-      </div>
-    </Card>
+      </motion.div>
+    </div>
   );
 };
 
