@@ -15,7 +15,7 @@ module.exports = {
       },
       perspective: {
         '1000': '1000px',
-      },
+      }
     },
   },
   darkMode: "class",

@@ -1,5 +1,13 @@
 import { useUser } from "@clerk/nextjs";
-import { collection, doc, getDocs, getFirestore } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+  query,
+  where,
+} from "firebase/firestore";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -22,22 +30,23 @@ const FlashcardPage = () => {
     async function getFlashcard() {
       if (!search || !user) return;
 
-      // Reference to the collection where the flashcard sets are stored
-      const userDocRef = doc(collection(db, "users"), user.id);
-      const flashcardsCollectionRef = collection(userDocRef, search);
+      const flashCardSetRef = doc(
+        db,
+        "users",
+        user.id,
+        "flashcardSets",
+        search
+      );
 
-      // Get all flashcard documents within the specific set
-      const querySnapshot = await getDocs(flashcardsCollectionRef);
+      const docSnap = await getDoc(flashCardSetRef);
 
-      const flashcards: any = [];
-      querySnapshot.forEach((doc) => {
-        flashcards.push(doc.data()); // Assuming each document represents a flashcard
-      });
-
-      if (flashcards.length > 0) {
+      if (docSnap.exists()) {
+        const flashcards = docSnap.data().flashcards;
+        console.log("Flashcards:", flashcards);
         setFlashcards(flashcards);
       } else {
-        console.log("No flashcards found for this set.");
+        console.log("No such document!");
+        setFlashcards([]);
       }
     }
 
@@ -49,7 +58,7 @@ const FlashcardPage = () => {
       <div className="pb-8">
         <h1 className={title({ size: "lg", color: "black" })}>{search}</h1>
       </div>
-      <div className="grid grid-col-3 gap-4 h-4/5 overflow-y-auto">
+      <div className="h-screen flex flex-row flex-wrap gap-4">
         {flashcards.length > 0 &&
           flashcards.map((flashcard, index) => (
             <Flashcard
