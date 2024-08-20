@@ -45,6 +45,7 @@ export default function GeneratePage() {
     }
 
     try {
+
       const response = await fetch("/api/generate", {
         method: "POST",
         body: text,
@@ -55,6 +56,7 @@ export default function GeneratePage() {
       }
 
       const data = await response.json();
+      console.log(`generate data: ${JSON.stringify(data, null, 2)}`);
       setFlashcards(data);
     } catch (error) {
       console.error("Error generating flashcards:", error);
@@ -107,7 +109,7 @@ export default function GeneratePage() {
             Generate Your Flashcards
           </h1>
         </div>
-        <div className="flex flex-col items-center gap-4">
+        <div className="w-full flex flex-col items-center gap-4">
           <Textarea
             isRequired
             variant="bordered"
@@ -118,12 +120,12 @@ export default function GeneratePage() {
             label="Enter Text"
             labelPlacement="outside"
             placeholder="Enter text to generate flashcards"
-            className="max-w-lg"
+            fullWidth={true}
           />
           <Button onClick={handleSubmit} variant="shadow" color="secondary">
             Generate Flashcards
           </Button>
-          <div className="grid grid-col-3 gap-4 h-2/5 overflow-y-auto">
+          <div className="w-full grid grid-col-3 gap-4 h-2/5 overflow-y-auto">
             {flashcards.length > 0 &&
               flashcards.map((flashcard, index) => (
                 <Flashcard

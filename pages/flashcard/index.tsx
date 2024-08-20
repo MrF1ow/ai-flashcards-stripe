@@ -22,21 +22,32 @@ const FlashcardPage = () => {
     async function getFlashcard() {
       if (!search || !user) return;
 
-      const colRef = collection(doc(collection(db, "users"), user.id), search);
-      const docs = await getDocs(colRef);
+      // Reference to the collection where the flashcard sets are stored
+      const userDocRef = doc(collection(db, "users"), user.id);
+      const flashcardsCollectionRef = collection(userDocRef, search);
+
+      // Get all flashcard documents within the specific set
+      const querySnapshot = await getDocs(flashcardsCollectionRef);
+
       const flashcards: any = [];
-      docs.forEach((doc) => {
-        flashcards.push({ id: doc.id, ...doc.data() });
+      querySnapshot.forEach((doc) => {
+        flashcards.push(doc.data()); // Assuming each document represents a flashcard
       });
-      setFlashcards(flashcards);
+
+      if (flashcards.length > 0) {
+        setFlashcards(flashcards);
+      } else {
+        console.log("No flashcards found for this set.");
+      }
     }
+
     getFlashcard();
   }, [search, user]);
 
   return (
     <DefaultLayout>
       <div className="pb-8">
-        <h1 className={title({ size: "lg", color: "black" })}>Flashcards</h1>
+        <h1 className={title({ size: "lg", color: "black" })}>{search}</h1>
       </div>
       <div className="grid grid-col-3 gap-4 h-4/5 overflow-y-auto">
         {flashcards.length > 0 &&
