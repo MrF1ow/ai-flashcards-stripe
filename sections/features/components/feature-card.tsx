@@ -1,15 +1,13 @@
 import { CardComponentProps } from "@/types";
 import { Card, CardHeader, CardBody } from "@nextui-org/card";
 
-const ReasonCard = ({ Icon, title, description }: CardComponentProps) => {
+const FeatureCard = ({ Icon, title, description }: CardComponentProps) => {
   return (
-    <Card
-      shadow="lg"
-    >
-      <CardHeader className="flex items-center justify-start">
-        <Icon size={48} className="p-1" />
+    <Card shadow="lg">
+      <CardHeader className="flex items-center justify-center">
+        <Icon size={48} />
       </CardHeader>
-      <CardBody className="text-left">
+      <CardBody className="text-center">
         <h3 className="text-lg font-bold text-[#FF1CF7]">{title}</h3>
         <p>{description}</p>
       </CardBody>
@@ -17,4 +15,4 @@ const ReasonCard = ({ Icon, title, description }: CardComponentProps) => {
   );
 };
 
-export default ReasonCard;
+export default FeatureCard;

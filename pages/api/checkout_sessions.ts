@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import type { NextApiRequest, NextApiResponse } from 'next'
 import Stripe from "stripe";
 
 const formatAmountForStripe = (amount: number, currency: string) => {
@@ -6,15 +6,17 @@ const formatAmountForStripe = (amount: number, currency: string) => {
 };
 
 const stripe = new Stripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string,
+  process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY as string,
   {
     apiVersion: "2024-06-20",
   }
 );
 
-export async function POST(req: { headers: { get: (arg0: string) => any; }; }) {
+export async function POST(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const params = {
+    const referer = req.headers.referer || "";
+
+    const params: Stripe.Checkout.SessionCreateParams = {
       mode: "subscription",
       payment_method_types: ["card"],
       line_items: [
@@ -33,33 +35,22 @@ export async function POST(req: { headers: { get: (arg0: string) => any; }; }) {
           quantity: 1,
         },
       ],
-      success_url: `${req.headers.get(
-        "Referer"
-      )}result?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.get(
-        "Referer"
-      )}result?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${referer}/result?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${referer}/result?session_id={CHECKOUT_SESSION_ID}`,
     };
 
     const checkoutSession = await stripe.checkout.sessions.create(params);
 
-    return NextResponse.json(checkoutSession, {
-      status: 200,
-    });
+    res.status(200).json(checkoutSession);
   } catch (error) {
     console.error("Error creating checkout session:", error);
-    return new NextResponse(
-      JSON.stringify({ error: { message: (error as Error).message } }),
-      {
-        status: 500,
-      }
-    );
+    res.status(500).json({ error: { message: (error as Error).message } });
   }
 }
 
-export async function GET(req: { nextUrl: { searchParams: any; }; }) {
-  const searchParams = req.nextUrl.searchParams;
-  const session_id = searchParams.get("session_id");
+export async function GET(req: NextApiRequest, res: NextApiResponse) {
+  const { query } = req;
+  const session_id = query.session_id as string;
 
   try {
     if (!session_id) {
@@ -68,12 +59,20 @@ export async function GET(req: { nextUrl: { searchParams: any; }; }) {
 
     const checkoutSession = await stripe.checkout.sessions.retrieve(session_id);
 
-    return NextResponse.json(checkoutSession);
+    res.status(200).json(checkoutSession);
   } catch (error) {
     console.error("Error retrieving checkout session:", error);
-    return NextResponse.json(
-      { error: { message: (error as Error).message } },
-      { status: 500 }
-    );
+    res.status(500).json({ error: { message: (error as Error).message } });
+  }
+}
+
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  switch (req.method) {
+    case "POST":
+      return POST(req, res);
+    case "GET":
+      return GET(req, res);
+    default:
+      res.status(405).json({ error: "Method not allowed" });
   }
 }

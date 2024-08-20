@@ -19,3 +19,10 @@ export interface CardComponentProps {
   title: string;
   description: string;
 }
+
+export interface PricingPlanProps {
+  type: "free" | "pro";
+  name: string;
+  price: string;
+  features: string[];
+}

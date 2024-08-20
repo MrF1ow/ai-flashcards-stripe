@@ -1,17 +1,17 @@
 import { motion } from "framer-motion";
 
 import SectionLayout from "@/layouts/section";
-import { subtitle, title } from "@/components/primitives";
+import { title } from "@/components/primitives";
 import { featureCards } from "@/config/information";
 import FeatureCard from "./components/feature-card";
 
 const FeaturesSection = () => {
   return (
-    <SectionLayout>
+    <SectionLayout color="#FF1CF7">
       <div className="w-full text-center pb-8">
         <div className="pb-8">
-          <h1 className={title({ size: "sm", color: "violet" })}>
-            Stop Wasting Time Making Flashcards! 
+          <h1 className={title({ size: "sm" })}>
+            Stop Wasting Time Making Flashcards!
           </h1>
         </div>
       </div>
