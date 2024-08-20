@@ -1,4 +1,5 @@
 import { SVGProps } from "react";
+import { IconType } from "react-icons";
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
@@ -11,4 +12,10 @@ export type FlashcardProps = {
 export interface FlashcardSetProps {
   name: string;
   flashcards: FlashcardProps[];
+}
+
+export interface CardComponentProps {
+  Icon: IconType;
+  title: string;
+  description: string;
 }
