@@ -36,6 +36,16 @@ export const siteConfig = {
       href: "/logout",
     },
   ],
+  sectionItems: [
+    {
+      label: "Features",
+      href: "#features",
+    },
+    {
+      label: "Pricing",
+      href: "#pricing",
+    },
+  ],
   links: {
     github: "https://github.com/MrF1ow/ai-flashcards-stripe",
   },

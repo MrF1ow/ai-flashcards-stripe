@@ -45,7 +45,6 @@ export default function GeneratePage() {
     }
 
     try {
-
       const response = await fetch("/api/generate", {
         method: "POST",
         body: text,
@@ -135,9 +134,11 @@ export default function GeneratePage() {
                 />
               ))}
           </div>
-          <Button onPress={onOpen} variant="shadow" color="secondary">
-            Save Flashcards
-          </Button>
+          {flashcards.length > 0 && (
+            <Button onPress={onOpen} variant="shadow" color="secondary">
+              Save Flashcards
+            </Button>
+          )}
         </div>
       </div>
       <PopupLayout>
