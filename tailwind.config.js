@@ -13,6 +13,9 @@ module.exports = {
       transform: {
         'rotate-y-180': 'rotateY(180deg)',
       },
+      perspective: {
+        '1000': '1000px',
+      },
     },
   },
   darkMode: "class",
