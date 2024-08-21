@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { FlashcardProps } from "@/types";
+import { useState } from "react";
 import { Card, CardBody } from "@nextui-org/card";
-import { motion } from "framer-motion";
 import ReactCardFlip from "react-card-flip";
+
+import { FlashcardProps } from "@/types";
 
 const Flashcard = ({ front, back }: FlashcardProps) => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -12,11 +12,11 @@ const Flashcard = ({ front, back }: FlashcardProps) => {
   };
 
   return (
-    <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
+    <ReactCardFlip flipDirection="vertical" isFlipped={isFlipped}>
       <Card
-        shadow="md"
-        className="w-full h-[150px] flex items-center justify-center"
         isPressable
+        className="w-full h-[150px] flex items-center justify-center"
+        shadow="md"
         onPress={handleFlip}
       >
         <CardBody className="flex justify-center items-center h-full w-full">
@@ -24,9 +24,9 @@ const Flashcard = ({ front, back }: FlashcardProps) => {
         </CardBody>
       </Card>
       <Card
-        shadow="md"
-        className="w-full h-[150px] flex items-center justify-center"
         isPressable
+        className="w-full h-[150px] flex items-center justify-center"
+        shadow="md"
         onPress={handleFlip}
       >
         <CardBody className="flex justify-center items-center h-full w-full">

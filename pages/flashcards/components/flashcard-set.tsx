@@ -14,9 +14,9 @@ const FlashcardSet = ({ name }: { name: string }) => {
   return (
     <Card
       isPressable
-      onPress={() => handleCardClick(name)}
       className="transition-transform transform hover:scale-105 cursor-pointer"
       shadow="md"
+      onPress={() => handleCardClick(name)}
     >
       <CardBody>
         <h1 className={title({ size: "sm", color: "black" })}>{name}</h1>

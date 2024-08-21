@@ -1,7 +1,7 @@
 import type { AppProps } from "next/app";
 
 import { NextUIProvider } from "@nextui-org/system";
-import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { ClerkProvider } from "@clerk/nextjs";
 import { useRouter } from "next/router";
 

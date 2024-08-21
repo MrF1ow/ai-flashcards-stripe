@@ -9,9 +9,9 @@ export default function SectionLayout({
 }) {
   return (
     <div
+      ref={sectionRef}
       className="relative w-screen flex flex-col h-auto justify-center"
       style={{ backgroundColor: color }}
-      ref={sectionRef}
     >
       <main className="container mx-auto max-w-7xl px-6 flex-grow py-16">
         {children}

@@ -1,12 +1,10 @@
-import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { useAuth } from "@clerk/nextjs";
 import { motion } from "framer-motion";
+import { Button } from "@nextui-org/button";
 
 import DefaultLayout from "@/layouts/default";
-import { subtitle, title } from "@/components/primitives";
+import { title } from "@/components/primitives";
 import { container, moveIn } from "@/components/movements";
-import { Button } from "@nextui-org/button";
 import FeaturesSection from "@/sections/features";
 import PricingSection from "@/sections/pricing";
 
@@ -19,8 +17,8 @@ export default function IndexPage() {
         <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10 h-allIsh">
           <div className="text-center">
             <motion.div
-              initial="initial"
               animate="animate"
+              initial="initial"
               variants={container}
             >
               <motion.h1
@@ -45,15 +43,15 @@ export default function IndexPage() {
                 variants={moveIn}
               >
                 <Button
-                  size="lg"
-                  radius="md"
                   color="secondary"
+                  radius="md"
+                  size="lg"
                   variant="shadow"
                   onClick={() => router.push("/generate")}
                 >
                   Get Started
                 </Button>
-                <Button size="lg" radius="md" color="default" variant="ghost">
+                <Button color="default" radius="md" size="lg" variant="ghost">
                   Learn More
                 </Button>
               </motion.div>

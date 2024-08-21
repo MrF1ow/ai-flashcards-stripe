@@ -1,16 +1,14 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import Stripe from "stripe";
 
 const formatAmountForStripe = (amount: number, currency: string) => {
   return Math.round(amount * 100);
 };
 
-const stripe = new Stripe(
-  process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY as string,
-  {
-    apiVersion: "2024-06-20",
-  }
-);
+const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY as string, {
+  apiVersion: "2024-06-20",
+});
 
 export async function POST(req: NextApiRequest, res: NextApiResponse) {
   try {

@@ -1,10 +1,11 @@
-import DefaultLayout from "@/layouts/default";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { CircularProgress } from "@nextui-org/progress";
-import { title } from "@/components/primitives";
 import { StripeCustomCheckoutSession } from "@stripe/stripe-js";
+
+import { title } from "@/components/primitives";
+import DefaultLayout from "@/layouts/default";
 
 const ResultPage = () => {
   const router = useRouter();
@@ -13,7 +14,7 @@ const ResultPage = () => {
 
   const [loading, setLoading] = useState(true);
   const [session, setSession] = useState<StripeCustomCheckoutSession | null>(
-    null
+    null,
   );
   const [error, setError] = useState<any>(null);
 
@@ -22,9 +23,10 @@ const ResultPage = () => {
       if (!session_id) return;
       try {
         const res = await fetch(
-          `/api/checkout_sessions?session_id=${session_id}`
+          `/api/checkout_sessions?session_id=${session_id}`,
         );
         const sessionData = await res.json();
+
         if (res.ok) {
           setSession(sessionData);
         } else {
@@ -36,6 +38,7 @@ const ResultPage = () => {
         setLoading(false);
       }
     };
+
     fetchCheckoutSession();
   }, [session_id]);
 

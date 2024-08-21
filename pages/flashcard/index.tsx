@@ -1,13 +1,5 @@
 import { useUser } from "@clerk/nextjs";
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  getFirestore,
-  query,
-  where,
-} from "firebase/firestore";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -34,13 +26,14 @@ const FlashcardPage = () => {
         "users",
         user.id,
         "flashcardSets",
-        search
+        search,
       );
 
       const docSnap = await getDoc(flashCardSetRef);
 
       if (docSnap.exists()) {
         const flashcards = docSnap.data().flashcards;
+
         console.log("Flashcards:", flashcards);
         setFlashcards(flashcards);
       } else {
@@ -63,8 +56,8 @@ const FlashcardPage = () => {
             flashcards.map((flashcard, index) => (
               <Flashcard
                 key={index}
-                front={flashcard.front}
                 back={flashcard.back}
+                front={flashcard.front}
               />
             ))}
         </div>

@@ -1,6 +1,7 @@
 import { TbWorld } from "react-icons/tb";
 import { FaGear } from "react-icons/fa6";
 import { PiMagicWandFill } from "react-icons/pi";
+
 import { CardComponentProps, PricingPlanProps } from "@/types";
 
 export const featureCards: CardComponentProps[] = [

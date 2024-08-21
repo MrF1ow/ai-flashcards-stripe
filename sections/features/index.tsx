@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 
+import FeatureCard from "./components/feature-card";
+
 import SectionLayout from "@/layouts/section";
 import { title } from "@/components/primitives";
 import { featureCards } from "@/config/information";
-import FeatureCard from "./components/feature-card";
 
 const FeaturesSection = () => {
   return (
@@ -20,8 +21,8 @@ const FeaturesSection = () => {
           <motion.div key={index} className="flex-1 min-w-0">
             <FeatureCard
               Icon={card.Icon}
-              title={card.title}
               description={card.description}
+              title={card.title}
             />
           </motion.div>
         ))}

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -52,7 +51,7 @@ export const Navbar = () => {
                 <NextLink
                   className={clsx(
                     linkStyles({ color: "foreground" }),
-                    "data-[active=true]:text-primary data-[active=true]:font-medium"
+                    "data-[active=true]:text-primary data-[active=true]:font-medium",
                   )}
                   color="foreground"
                   href={item.href}
@@ -79,19 +78,19 @@ export const Navbar = () => {
         {!isSignedIn && (
           <NavbarItem className="hidden sm:flex gap-2">
             <Button
-              radius="sm"
               className="bg-gradient-to-tr from-[#FF1CF7] to-[#b249f8] text-white shadow-lg"
-              variant="solid"
+              radius="sm"
               size="md"
+              variant="solid"
               onClick={handleSignIn}
             >
               Sign In
             </Button>
             <Button
-              radius="sm"
               className="bg-gradient-to-tr from-[#FF1CF7] to-[#b249f8] text-white shadow-lg"
-              variant="solid"
+              radius="sm"
               size="md"
+              variant="solid"
               onClick={handleSignUp}
             >
               Sign Up

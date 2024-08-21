@@ -1,5 +1,6 @@
-import { CardComponentProps } from "@/types";
 import { Card, CardHeader, CardBody } from "@nextui-org/card";
+
+import { CardComponentProps } from "@/types";
 
 const FeatureCard = ({ Icon, title, description }: CardComponentProps) => {
   return (

@@ -1,11 +1,12 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+
+import PricingCard from "./components/pricing-card";
+
 import SectionLayout from "@/layouts/section";
 import { title } from "@/components/primitives";
 import { pricingPlans } from "@/config/information";
-import PricingCard from "./components/pricing-card";
 
 const PricingSection = () => {
   return (
@@ -22,10 +23,10 @@ const PricingSection = () => {
           <div key={index} className="flex-1 min-w-0">
             <PricingCard
               key={index}
-              type={card.type}
+              features={card.features}
               name={card.name}
               price={card.price}
-              features={card.features}
+              type={card.type}
             />
           </div>
         ))}

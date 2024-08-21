@@ -1,4 +1,4 @@
-import { Variant } from 'framer-motion';
+import { Variant } from "framer-motion";
 
 export const container = {
   initial: {},

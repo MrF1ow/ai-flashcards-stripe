@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { NextResponse } from "next/server";
-import { FlashcardProps } from "../../types";
 import OpenAI from "openai";
+
+import { FlashcardProps } from "../../types";
 
 const systemPrompt = `
 You are a flashcard creator, you take in text and create multiple flashcards from it. Make sure to create exactly 10 flashcards.
@@ -34,7 +34,7 @@ function isFlashcardPropsArray(data: any): data is FlashcardProps[] {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   const apiKey = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
 
@@ -65,7 +65,9 @@ export default async function handler(
 
   // Check if the response data is in the correct format
   if (!isFlashcardPropsArray(responseData.flashcards)) {
-    return res.status(500).json({ message: "Invalid flashcard data return format" });
+    return res
+      .status(500)
+      .json({ message: "Invalid flashcard data return format" });
   }
 
   return res.status(200).json(responseData.flashcards);

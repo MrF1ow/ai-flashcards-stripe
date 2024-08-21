@@ -41,6 +41,7 @@ export default function GeneratePage() {
   const handleSubmit = async () => {
     if (!text.trim()) {
       alert("Please enter some text to generate flashcards.");
+
       return;
     }
 
@@ -55,6 +56,7 @@ export default function GeneratePage() {
       }
 
       const data = await response.json();
+
       console.log(`generate data: ${JSON.stringify(data, null, 2)}`);
       setFlashcards(data);
     } catch (error) {
@@ -66,6 +68,7 @@ export default function GeneratePage() {
   const handleSaveFlashcards = async () => {
     if (!setName.trim()) {
       alert("Please enter a name for your flashcard set.");
+
       return;
     }
 
@@ -81,12 +84,14 @@ export default function GeneratePage() {
           ...(userData.flashcardSets || []),
           { name: setName },
         ];
+
         batch.update(userDocRef, { flashcardSets: updatedSets });
       } else {
         batch.set(userDocRef, { flashcardSets: [{ name: setName }] });
       }
 
       const setDocRef = doc(collection(userDocRef, "flashcardSets"), setName);
+
       batch.set(setDocRef, { flashcards });
 
       await batch.commit();
@@ -111,17 +116,17 @@ export default function GeneratePage() {
         <div className="w-full flex flex-col items-center gap-4">
           <Textarea
             isRequired
-            variant="bordered"
-            value={text}
-            onChange={(e: { target: { value: SetStateAction<string> } }) =>
-              setText(e.target.value)
-            }
+            fullWidth={true}
             label="Enter Text"
             labelPlacement="outside"
             placeholder="Enter text to generate flashcards"
-            fullWidth={true}
+            value={text}
+            variant="bordered"
+            onChange={(e: { target: { value: SetStateAction<string> } }) =>
+              setText(e.target.value)
+            }
           />
-          <Button onClick={handleSubmit} variant="shadow" color="secondary">
+          <Button color="secondary" variant="shadow" onClick={handleSubmit}>
             Generate Flashcards
           </Button>
           <div className="w-full flex items-center justify-center">
@@ -130,14 +135,14 @@ export default function GeneratePage() {
                 flashcards.map((flashcard, index) => (
                   <Flashcard
                     key={index}
-                    front={flashcard.front}
                     back={flashcard.back}
+                    front={flashcard.front}
                   />
                 ))}
             </div>
           </div>
           {flashcards.length > 0 && (
-            <Button onPress={onOpen} variant="shadow" color="secondary">
+            <Button color="secondary" variant="shadow" onPress={onOpen}>
               Save Flashcards
             </Button>
           )}
@@ -151,25 +156,25 @@ export default function GeneratePage() {
               <p>Enter a name for the flashcard set:</p>
               <Input
                 isRequired
-                type="text"
-                label="Set Name"
-                defaultValue="Chemistry"
                 className="max-w-xs"
+                defaultValue="Chemistry"
+                label="Set Name"
+                type="text"
+                value={setName}
                 onChange={(e: { target: { value: SetStateAction<string> } }) =>
                   setSetName(e.target.value)
                 }
-                value={setName}
               />
             </ModalBody>
             <ModalFooter>
               <Button
-                onClick={handleSaveFlashcards}
-                variant="ghost"
                 color="success"
+                variant="ghost"
+                onClick={handleSaveFlashcards}
               >
                 Save
               </Button>
-              <Button onClick={onOpenChange} variant="light" color="danger">
+              <Button color="danger" variant="light" onClick={onOpenChange}>
                 Cancel
               </Button>
             </ModalFooter>

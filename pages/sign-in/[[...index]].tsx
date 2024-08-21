@@ -8,6 +8,7 @@ export default function SignUpPage() {
   const { theme } = useTheme();
 
   const formTheme = theme === "dark" ? dark : undefined;
+
   return (
     <AuthoLayout>
       <SignIn

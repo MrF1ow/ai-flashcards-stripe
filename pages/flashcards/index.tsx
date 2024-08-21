@@ -5,18 +5,16 @@ import {
   doc,
   collection,
   getDoc,
-  writeBatch,
   getFirestore,
   setDoc,
 } from "firebase/firestore";
 import { useUser } from "@clerk/nextjs";
 
+import FlashcardSet from "./components/flashcard-set";
+
 import DefaultLayout from "@/layouts/default";
 import { title } from "@/components/primitives";
-import FlashcardSet from "./components/flashcard-set";
 import { FlashcardSetProps } from "@/types";
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/router";
 
 export default function FlashcardPage() {
   const { user } = useUser();
@@ -28,8 +26,10 @@ export default function FlashcardPage() {
       if (!user) return;
       const docRef = doc(collection(db, "users"), user.id);
       const docSnap = await getDoc(docRef);
+
       if (docSnap.exists()) {
         const collections = docSnap.data().flashcardSets || [];
+
         setFlashcardSets(collections);
       } else {
         await setDoc(docRef, { flashcardSets: [] });
