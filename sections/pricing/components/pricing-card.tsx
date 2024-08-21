@@ -1,6 +1,6 @@
 import { PricingPlanProps } from "@/types";
 import getStripe from "@/utils/get-stripe";
-import { Card, CardHeader, CardBody } from "@nextui-org/card";
+import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Button } from "@nextui-org/button";
 import { useRouter } from "next/router";
 
@@ -31,23 +31,25 @@ const PricingCard = ({ type, name, price, features }: PricingPlanProps) => {
     }
   };
   return (
-    <Card shadow="lg" className="w-full h-full p-4 flex flex-col">
+    <Card shadow="lg">
       <CardHeader className="flex flex-col items-start justify-start pb-4">
         <h3 className="text-lg font-bold text-[#FF1CF7]">{name}</h3>
         <span className="text-lg font-bold ml-1">{price}</span>
       </CardHeader>
-      <CardBody className="text-left flex-grow">
+      <CardBody className="text-left">
         <ul className="list-disc list-inside pb-4">
           {features.map((feature, index) => (
-            <li key={index} className="mb-2 break-words">{feature}</li>
+            <li key={index} className="mb-2 whitespace-normal break-words">
+              {feature}
+            </li>
           ))}
         </ul>
-        <div className="flex justify-start">
-          <Button onClick={handleSubmit} color="secondary" variant="solid">
-            {type === "free" ? "Sign Up" : "Subscribe"}
-          </Button>
-        </div>
       </CardBody>
+      <CardFooter className="flex justify-start">
+        <Button onClick={handleSubmit} color="secondary" variant="solid">
+          {type === "free" ? "Sign Up" : "Subscribe"}
+        </Button>
+      </CardFooter>
     </Card>
   );
 };

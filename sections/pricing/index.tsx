@@ -17,16 +17,17 @@ const PricingSection = () => {
           </h1>
         </div>
       </div>
-      <div className="flex flex-wrap gap-4 justify-center">
+      <div className="flex flex-row gap-4">
         {pricingPlans.map((card, index) => (
-          <motion.div key={index} className="w-[300px] h-[400px]">
+          <div key={index} className="flex-1 min-w-0">
             <PricingCard
+              key={index}
               type={card.type}
               name={card.name}
               price={card.price}
               features={card.features}
             />
-          </motion.div>
+          </div>
         ))}
       </div>
     </SectionLayout>

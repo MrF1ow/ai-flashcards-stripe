@@ -19,7 +19,6 @@ import { title } from "@/components/primitives";
 const FlashcardPage = () => {
   const { user } = useUser();
   const [flashcards, setFlashcards] = useState<FlashcardProps[]>([]);
-  const [flipped, setFlipped] = useState({});
 
   const searchParams = useSearchParams();
   const search = searchParams.get("id");
@@ -58,15 +57,17 @@ const FlashcardPage = () => {
       <div className="pb-8">
         <h1 className={title({ size: "lg", color: "black" })}>{search}</h1>
       </div>
-      <div className="h-screen flex flex-row flex-wrap gap-4">
-        {flashcards.length > 0 &&
-          flashcards.map((flashcard, index) => (
-            <Flashcard
-              key={index}
-              front={flashcard.front}
-              back={flashcard.back}
-            />
-          ))}
+      <div className="w-full flex items-center justify-center">
+        <div className="w-full grid grid-cols-3 gap-4 h-2/5 overflow-y-auto">
+          {flashcards.length > 0 &&
+            flashcards.map((flashcard, index) => (
+              <Flashcard
+                key={index}
+                front={flashcard.front}
+                back={flashcard.back}
+              />
+            ))}
+        </div>
       </div>
     </DefaultLayout>
   );

@@ -124,15 +124,17 @@ export default function GeneratePage() {
           <Button onClick={handleSubmit} variant="shadow" color="secondary">
             Generate Flashcards
           </Button>
-          <div className="w-full grid grid-col-3 gap-4 h-2/5 overflow-y-auto">
-            {flashcards.length > 0 &&
-              flashcards.map((flashcard, index) => (
-                <Flashcard
-                  key={index}
-                  front={flashcard.front}
-                  back={flashcard.back}
-                />
-              ))}
+          <div className="w-full flex items-center justify-center">
+            <div className="w-full grid grid-cols-3 gap-4 h-2/5 overflow-y-auto">
+              {flashcards.length > 0 &&
+                flashcards.map((flashcard, index) => (
+                  <Flashcard
+                    key={index}
+                    front={flashcard.front}
+                    back={flashcard.back}
+                  />
+                ))}
+            </div>
           </div>
           {flashcards.length > 0 && (
             <Button onPress={onOpen} variant="shadow" color="secondary">

@@ -15,7 +15,7 @@ const Flashcard = ({ front, back }: FlashcardProps) => {
     <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
       <Card
         shadow="md"
-        className="w-[200px] h-[150px] flex items-center justify-center"
+        className="w-full h-[150px] flex items-center justify-center"
         isPressable
         onPress={handleFlip}
       >
@@ -25,7 +25,7 @@ const Flashcard = ({ front, back }: FlashcardProps) => {
       </Card>
       <Card
         shadow="md"
-        className="w-[200px] h-[150px] flex items-center justify-center"
+        className="w-full h-[150px] flex items-center justify-center"
         isPressable
         onPress={handleFlip}
       >
