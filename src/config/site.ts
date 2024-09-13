@@ -46,7 +46,4 @@ export const siteConfig = {
       href: "#pricing",
     },
   ],
-  links: {
-    github: "https://github.com/MrF1ow/ai-flashcards-stripe",
-  },
 };

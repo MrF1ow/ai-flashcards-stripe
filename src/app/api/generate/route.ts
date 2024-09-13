@@ -17,7 +17,7 @@ You should return in the following JSON format:
 }
 `;
 
-function isFlashcardProps(data: any): data is FlashcardProps {
+function isFlashcardProps(data: FlashcardProps): data is FlashcardProps {
   return (
     typeof data === "object" &&
     data !== null &&
@@ -28,7 +28,7 @@ function isFlashcardProps(data: any): data is FlashcardProps {
   );
 }
 
-function isFlashcardPropsArray(data: any): data is FlashcardProps[] {
+function isFlashcardPropsArray(data: FlashcardProps[]): data is FlashcardProps[] {
   return Array.isArray(data) && data.every(isFlashcardProps);
 }
 

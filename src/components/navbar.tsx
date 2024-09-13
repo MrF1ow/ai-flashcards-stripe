@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   Navbar as NextUINavbar,
@@ -20,7 +20,6 @@ import { useAuth, useClerk } from "@clerk/nextjs";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
-import { GithubIcon } from "@/components/icons";
 
 export const Navbar = () => {
   const router = useRouter();
@@ -53,7 +52,7 @@ export const Navbar = () => {
                 <NextLink
                   className={clsx(
                     linkStyles({ color: "foreground" }),
-                    "data-[active=true]:text-primary data-[active=true]:font-medium",
+                    "data-[active=true]:text-primary data-[active=true]:font-medium"
                   )}
                   color="foreground"
                   href={item.href}
@@ -71,9 +70,6 @@ export const Navbar = () => {
         justify="end"
       >
         <NavbarItem className="hidden sm:flex gap-2">
-          <Link isExternal href={siteConfig.links.github}>
-            <GithubIcon className="text-default-500" />
-          </Link>
           <ThemeSwitch />
           {isSignedIn && <IoIosLogOut size={22} onClick={handleLogout} />}
         </NavbarItem>
@@ -102,9 +98,6 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <Link isExternal href={siteConfig.links.github}>
-          <GithubIcon className="text-default-500" />
-        </Link>
         <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>
@@ -118,8 +111,8 @@ export const Navbar = () => {
                   index === 2
                     ? "primary"
                     : index === siteConfig.navMenuItems.length - 1
-                      ? "danger"
-                      : "foreground"
+                    ? "danger"
+                    : "foreground"
                 }
                 href="#"
                 size="lg"

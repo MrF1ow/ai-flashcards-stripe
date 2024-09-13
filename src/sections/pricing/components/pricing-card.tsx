@@ -14,7 +14,7 @@ const PricingCard = ({ type, name, price, features }: PricingPlanProps) => {
 
       return;
     } else if (type === "pro") {
-      const checkoutSession = await fetch("/api/checkout_sessions", {
+      const checkoutSession = await fetch("/api/checkout", {
         method: "POST",
         headers: { origin: window.location.origin },
       });
