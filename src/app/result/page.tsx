@@ -1,20 +1,20 @@
-'use client'
+"use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { CircularProgress } from "@nextui-org/progress";
 import { StripeCustomCheckoutSession } from "@stripe/stripe-js";
 
 import { title } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
 
-const ResultPage = () => {
+const ResultPageContent = () => {
   const searchParams = useSearchParams();
   const session_id = searchParams.get("session_id");
 
   const [loading, setLoading] = useState(true);
   const [session, setSession] = useState<StripeCustomCheckoutSession | null>(
-    null,
+    null
   );
   const [error, setError] = useState<string | object | null>(null);
 
@@ -23,7 +23,7 @@ const ResultPage = () => {
       if (!session_id) return;
       try {
         const res = await fetch(
-          `/api/checkout_sessions?session_id=${session_id}`,
+          `/api/checkout?session_id=${session_id}`
         );
         const sessionData = await res.json();
 
@@ -60,7 +60,9 @@ const ResultPage = () => {
       <DefaultLayout>
         <div className="flex justify-center items-center h-[80vh]">
           <div className="p-8">
-            <h1 className={title({ size: "sm" })}>{typeof error === 'string' ? error : JSON.stringify(error)}</h1>
+            <h1 className={title({ size: "sm" })}>
+              {typeof error === "string" ? error : JSON.stringify(error)}
+            </h1>
           </div>
         </div>
       </DefaultLayout>
@@ -107,6 +109,14 @@ const ResultPage = () => {
         )}
       </div>
     </DefaultLayout>
+  );
+};
+
+const ResultPage = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResultPageContent />
+    </Suspense>
   );
 };
 
