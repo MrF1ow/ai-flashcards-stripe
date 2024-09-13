@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+    --nextui-background: #f8f9fa;
+    overflow-x: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --nextui-background: #212529;
+    }
+}
