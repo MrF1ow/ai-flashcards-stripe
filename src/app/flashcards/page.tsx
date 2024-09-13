@@ -46,7 +46,7 @@ export default function FlashcardPage() {
           <h1 className={title({ size: "lg", color: "black" })}>Flashcards</h1>
         </div>
       </div>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4" >
         {flashcardSets.map((flashcardSet: FlashcardSetProps, index: number) => (
           <FlashcardSet key={index} name={flashcardSet.name} />
         ))}

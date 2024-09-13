@@ -5,6 +5,7 @@
 
 :root {
     --nextui-background: #f8f9fa;
+    overflow-x: hidden;
 }
 
 @media (prefers-color-scheme: dark) {

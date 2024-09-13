@@ -1,3 +1,5 @@
+'use client'
+
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CircularProgress } from "@nextui-org/progress";

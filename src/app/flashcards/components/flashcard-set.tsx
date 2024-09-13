@@ -8,13 +8,12 @@ const FlashcardSet = ({ name }: { name: string }) => {
 
   const handleCardClick = (id: string) => {
     router.push(`/flashcard?id=${id}`);
-    console.log("Clicked", id);
   };
 
   return (
     <Card
       isPressable
-      className="transition-transform transform hover:scale-105 cursor-pointer"
+      className="transition-transform transform cursor-pointer"
       shadow="md"
       onPress={() => handleCardClick(name)}
     >

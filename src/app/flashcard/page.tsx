@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useUser } from "@clerk/nextjs";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
@@ -10,6 +10,7 @@ import DefaultLayout from "@/layouts/default";
 import Flashcard from "@/components/flashcard";
 import { title } from "@/components/primitives";
 import app from "@/lib/firebaseConfig";
+import FlashcardGrid from "@/components/flashcard-grid";
 
 const FlashcardPage = () => {
   const { user } = useUser();
@@ -29,7 +30,7 @@ const FlashcardPage = () => {
         "users",
         user.id,
         "flashcardSets",
-        search,
+        search
       );
 
       const docSnap = await getDoc(flashCardSetRef);
@@ -53,18 +54,7 @@ const FlashcardPage = () => {
       <div className="pb-8">
         <h1 className={title({ size: "lg", color: "black" })}>{search}</h1>
       </div>
-      <div className="w-full flex items-center justify-center">
-        <div className="w-full grid grid-cols-3 gap-4 h-2/5 overflow-y-auto">
-          {flashcards.length > 0 &&
-            flashcards.map((flashcard, index) => (
-              <Flashcard
-                key={index}
-                back={flashcard.back}
-                front={flashcard.front}
-              />
-            ))}
-        </div>
-      </div>
+      <FlashcardGrid flashcards={flashcards} />
     </DefaultLayout>
   );
 };

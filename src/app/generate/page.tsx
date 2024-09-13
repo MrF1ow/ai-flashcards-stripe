@@ -1,6 +1,6 @@
 "use client";
 
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { Input, Textarea } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import {
@@ -23,7 +23,7 @@ import { useUser } from "@clerk/nextjs";
 import DefaultLayout from "@/layouts/default";
 import PopupLayout from "@/layouts/popup";
 import { title } from "@/components/primitives";
-import Flashcard from "@/components/flashcard";
+import FlashcardGrid from "@/components/flashcard-grid";
 import { FlashcardProps } from "@/types";
 import app from "@/lib/firebaseConfig";
 
@@ -34,6 +34,8 @@ export default function GeneratePage() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const db = getFirestore(app);
   const user = useUser().user;
+
+  useEffect(() => {}, [flashcards]);
 
   if (!user) {
     return null;
@@ -59,7 +61,7 @@ export default function GeneratePage() {
       const data = await response.json();
 
       console.log(`generate data: ${JSON.stringify(data, null, 2)}`);
-      setFlashcards(data);
+      setFlashcards(data.flashcards);
     } catch (error) {
       console.error("Error generating flashcards:", error);
       alert("An error occurred while generating flashcards. Please try again.");
@@ -130,18 +132,7 @@ export default function GeneratePage() {
           <Button color="secondary" variant="shadow" onClick={handleSubmit}>
             Generate Flashcards
           </Button>
-          <div className="w-full flex items-center justify-center">
-            <div className="w-full grid grid-cols-3 gap-4 h-2/5 overflow-y-auto">
-              {flashcards.length > 0 &&
-                flashcards.map((flashcard, index) => (
-                  <Flashcard
-                    key={index}
-                    back={flashcard.back}
-                    front={flashcard.front}
-                  />
-                ))}
-            </div>
-          </div>
+          {flashcards.length > 0 && <FlashcardGrid flashcards={flashcards} />}
           {flashcards.length > 0 && (
             <Button color="secondary" variant="shadow" onPress={onOpen}>
               Save Flashcards
