@@ -37,7 +37,7 @@ export default function FlashcardPage() {
       }
     }
     getFlashcardSets();
-  }, [user]);
+  }, [user, flashcardSets]);
 
   return (
     <DefaultLayout>
