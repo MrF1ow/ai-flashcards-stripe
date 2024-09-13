@@ -20,7 +20,6 @@ import { useAuth, useClerk } from "@clerk/nextjs";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
-import { GithubIcon } from "@/components/icons";
 
 export const Navbar = () => {
   const router = useRouter();

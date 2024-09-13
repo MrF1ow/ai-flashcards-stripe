@@ -6,7 +6,7 @@ const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY as string, {
   apiVersion: "2024-06-20",
 });
 
-const formatAmountForStripe = (amount: number, currency: string) => {
+const formatAmountForStripe = (amount: number) => {
   return Math.round(amount * 100);
 };
 
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
             product_data: {
               name: "Pro subscription",
             },
-            unit_amount: formatAmountForStripe(10, "usd"),
+            unit_amount: formatAmountForStripe(10),
             recurring: {
               interval: "month",
               interval_count: 1,

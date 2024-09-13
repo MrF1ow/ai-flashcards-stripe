@@ -28,10 +28,6 @@ const FlashcardPage = () => {
 
   const db = getFirestore(app);
 
-  if (!user) {
-    return null;
-  }
-
   useEffect(() => {
     async function getFlashcard() {
       if (!search || !user) return;
@@ -59,6 +55,10 @@ const FlashcardPage = () => {
 
     getFlashcard();
   }, [search, user]);
+
+  if (!user) {
+    return null;
+  }
 
   const handleSubmitDelete = async () => {
     if (!search) {

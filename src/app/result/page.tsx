@@ -1,6 +1,6 @@
 'use client'
 
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CircularProgress } from "@nextui-org/progress";
 import { StripeCustomCheckoutSession } from "@stripe/stripe-js";
@@ -9,7 +9,6 @@ import { title } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
 
 const ResultPage = () => {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const session_id = searchParams.get("session_id");
 
@@ -17,7 +16,7 @@ const ResultPage = () => {
   const [session, setSession] = useState<StripeCustomCheckoutSession | null>(
     null,
   );
-  const [error, setError] = useState<any>(null);
+  const [error, setError] = useState<string | object | null>(null);
 
   useEffect(() => {
     const fetchCheckoutSession = async () => {
@@ -61,7 +60,7 @@ const ResultPage = () => {
       <DefaultLayout>
         <div className="flex justify-center items-center h-[80vh]">
           <div className="p-8">
-            <h1 className={title({ size: "sm" })}>{error}</h1>
+            <h1 className={title({ size: "sm" })}>{typeof error === 'string' ? error : JSON.stringify(error)}</h1>
           </div>
         </div>
       </DefaultLayout>
