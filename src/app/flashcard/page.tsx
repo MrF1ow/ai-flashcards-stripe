@@ -9,7 +9,7 @@ import {
   writeBatch,
 } from "firebase/firestore";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 
 import { FlashcardProps } from "@/types";
 import DefaultLayout from "@/layouts/default";
@@ -18,7 +18,7 @@ import app from "@/lib/firebaseConfig";
 import FlashcardGrid from "@/components/flashcard-grid";
 import { Button } from "@nextui-org/button";
 
-const FlashcardPage = () => {
+const FlashcardPageContent = () => {
   const { user } = useUser();
   const [flashcards, setFlashcards] = useState<FlashcardProps[]>([]);
   const router = useRouter();
@@ -115,16 +115,20 @@ const FlashcardPage = () => {
     <DefaultLayout>
       <div className="pb-8 flex flex-row justify-between items-center">
         <h1 className={title({ size: "lg", color: "black" })}>{search}</h1>
-        <Button
-          color="danger"
-          variant="light"
-          onClick={handleSubmitDelete}
-        >
+        <Button color="danger" variant="light" onClick={handleSubmitDelete}>
           Delete
         </Button>
       </div>
       <FlashcardGrid flashcards={flashcards} />
     </DefaultLayout>
+  );
+};
+
+const FlashcardPage = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <FlashcardPageContent />
+    </Suspense>
   );
 };
 
